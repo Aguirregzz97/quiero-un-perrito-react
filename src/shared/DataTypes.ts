@@ -8,6 +8,7 @@ export type UserModel = {
     bio: string;
     image: string;
     location: string;
+    size?: string;
 };
 
 export interface Dog {

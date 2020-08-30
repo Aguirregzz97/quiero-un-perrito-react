@@ -6,9 +6,7 @@ import { useCurrentUser } from '../shared/UserHelper'
 
 export default function Home() {
 
-    useEffect(() => {
-        console.log(process.env.REACT_APP_API_KEY)
-    })
+    const currentUser = useCurrentUser()
 
     return (
         <div>

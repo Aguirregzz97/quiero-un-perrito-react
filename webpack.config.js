@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: './src/index.tsx',
@@ -13,6 +14,9 @@ const config = {
   devServer: {
     historyApiFallback: true
   },
+  plugins: [
+    new Dotenv()
+  ],
   module: {
     rules: [
       {

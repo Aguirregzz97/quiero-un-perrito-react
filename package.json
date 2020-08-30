@@ -13,6 +13,10 @@
     "build-prod": "webpack -p --mode production",
     "test": "jest"
   },
+  "engines": {
+    "node": "12.18.3",
+    "yarn": "1.10.1"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",

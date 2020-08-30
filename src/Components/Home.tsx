@@ -4,7 +4,7 @@ import { UserModel, Dog, AdoptionRequestModel } from '../shared/DataTypes';
 import { RestApi } from '../shared/RestApi';
 import { useCurrentUser } from '../shared/UserHelper';
 import { FixedSizeList } from 'react-window';
-import { ListItem, ListItemText, List, ListSubheader, Grid, Modal, Dialog, Button } from '@material-ui/core';
+import { ListItem, ListItemText, List, ListSubheader, Grid, Modal, Dialog, Button, Icon, Tooltip, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Login from './Login';
 import * as firebase from 'firebase/app';
@@ -12,6 +12,7 @@ import 'firebase/functions';
 import { AdoptionRequestsCollection } from '../shared/Collections';
 import { functions } from './../shared/Firebase'
 import styled from 'styled-components'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
 
 const Container = styled.div`
 `
@@ -144,6 +145,9 @@ export default function Home() {
                         </ul>
                     </List>
                 </Grid>
+                <Tooltip style={{ fontSize: '50px', color: 'green', position: 'fixed', bottom: '0', right: '0', marginRight: '20px', marginBottom: '20px' }} title="Agrega un nuevo perro!">
+                    <Icon style={{ fontSize: '50px', color: 'green', position: 'fixed', bottom: '0', right: '0', marginRight: '20px', marginBottom: '20px' }} component={ AddCircleIcon } />
+                </Tooltip>
             </>
         )
     }

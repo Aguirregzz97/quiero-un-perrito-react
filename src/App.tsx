@@ -12,14 +12,10 @@ type Props = {
 export class App extends React.Component<Props, State> {
   render() {
     return (
-      <div>
-        <main>
-            <Switch>
-              <Route exact={ true } path='/' component={ Home } />
-              <Route path='/registration' component={ Register } />
-            </Switch>
-        </main>
-      </div>
+      <Switch>
+        <Route exact={ true } path='/' component={ Home } />
+        <Route exact={ true } path='/registration' component={ Register } />
+      </Switch>
     )
   }
 }

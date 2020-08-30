@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import Login from './Login';
 import * as firebase from 'firebase/app';
 import 'firebase/functions';
-import { AdoptionRequestsCollection } from '../shared/collections';
+import { AdoptionRequestsCollection } from '../shared/Collections';
 import { functions } from './../shared/Firebase'
 import styled from 'styled-components'
 

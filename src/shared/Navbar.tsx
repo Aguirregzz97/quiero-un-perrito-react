@@ -18,7 +18,9 @@ export default function Navbar() {
                 <Typography variant="h6">
                     <Link style={{ color: 'white', paddingRight: '10px' }} to='/'>Inicio</Link>
                 </Typography>
-                <Button color="inherit">Ajustes</Button>
+                <Button color="inherit">
+                    <Link style={{ color: 'white' }} to='/preferences'>Ajustes</Link>
+                </Button>
                 <Button color="inherit">Perfil</Button>
             </Toolbar>
         </AppBar>

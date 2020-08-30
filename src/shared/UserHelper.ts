@@ -2,7 +2,7 @@ import { UserModel } from "./DataTypes";
 import { useState, useEffect } from "react";
 import { auth } from './Firebase';
 import { firestore } from "firebase";
-import { UserCollection } from "./collections";
+import { UserCollection } from "./Collections";
 
 export function useCurrentUser<T extends UserModel>() {
   const [currentUser, setCurrentUser] = useState<T | null | undefined>(undefined);

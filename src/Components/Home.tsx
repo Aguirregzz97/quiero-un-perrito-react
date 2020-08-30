@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { UserModel, Dog } from '../shared/DataTypes';
+import { UserModel, Dog, AdoptionRequestModel } from '../shared/DataTypes';
 import { RestApi } from '../shared/RestApi';
 import { useCurrentUser } from '../shared/UserHelper';
 import { FixedSizeList } from 'react-window';
@@ -10,6 +10,11 @@ import Login from './Login';
 import * as firebase from 'firebase/app';
 import 'firebase/functions';
 import { AdoptionRequestsCollection } from '../shared/collections';
+import { functions } from './../shared/Firebase'
+import styled from 'styled-components'
+
+const Container = styled.div`
+`
 
 const getEmptyDoggo = (): Dog => {
     return {
@@ -31,17 +36,29 @@ export default function Home() {
     const [currentDog, setCurrentDog] = useState({});
     const [currentDoggo, setCurrentDoggo] = useState(getEmptyDoggo());
     const [nearbyDogs, setNearbyDogs] = useState(new Array<Dog>());
+    const [currentAdoptionRequests, setCurrentAdoptionRequests] = useState<AdoptionRequestModel[]>()
+    const [currentMatchIndex, setCurrentMatchIndex] = useState<number>(0)
 
     const currentUser = useCurrentUser<UserModel>();
 
-    const showDogInfo = (item: any) => {
-        return (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-            setCurrentDog({
-                name: 'doggo'
-            });
-            setModalOpen(true);
-        };
-    };
+    const fetchCurrentMatches = () => {
+        let getAdoptionRequests = functions.httpsCallable('getAdoptionRequests');
+        getAdoptionRequests({token: "letMeIn"}).then(function(result: any) {
+            const data = result.data
+            setCurrentAdoptionRequests(data)
+        })
+    }
+
+    useEffect(() => {
+        fetchCurrentMatches()
+    }, [])
+
+    function showDogInfo(index: number) {
+        return (event: any) => {
+            setCurrentMatchIndex(index)
+            setModalOpen(true)
+        }
+    } 
 
     const handleClose = () => {
         setModalOpen(false);
@@ -79,7 +96,8 @@ export default function Home() {
 
     const onClickNo = async () => {
         setIndex(index + 1);
-    };
+    }
+
 
     useEffect(() => {
         console.log(index);
@@ -90,18 +108,20 @@ export default function Home() {
             setCurrentDoggo(getEmptyDoggo());
         }
     }, [index, nearbyDogs]);
-
-    if (currentUser && currentUser.type !== 'owner') {
-        console.log(currentUser);
+    
+    if (!currentUser || !currentAdoptionRequests) {
+        return (<h1>Loading...</h1>)
+    }
+    else if (currentUser && currentUser.type === 'owner' && currentAdoptionRequests) {
         return (
             <>
-                <Dialog
-                    open={modalOpen}
-                    onClose={handleClose}
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
-                >
-                    <h5>hola</h5>
+                <Dialog onClose={ handleClose } open={ modalOpen }>
+                    <Container>
+                            <img style={{ width: '300px' }} src={ currentAdoptionRequests[currentMatchIndex].dog.images[0] } />
+                            <h5 style ={{ width: '100%' }}>{currentAdoptionRequests[currentMatchIndex].seeker.first_name} quiere adoptar a</h5>
+                            <h5>{currentAdoptionRequests[currentMatchIndex].dog.name}</h5>
+                            <h5>{currentAdoptionRequests[currentMatchIndex].adoption_request.reason_description}</h5>
+                    </Container>
                 </Dialog>
                 <Grid
                     style={{ paddingTop: '50px' }}
@@ -110,21 +130,24 @@ export default function Home() {
                     justify="space-between"
                     alignItems="center"
                 >
-                    <h4>¡Personas que quieren adoptar!</h4>
+                    <h5 className='text-center'>{currentUser.first_name}, ¡Hay personas que quieren adoptar a tu perro!</h5>
                     <List subheader={<li />}>
                         <ul>
-                            {[0, 1, 2, 3].map((item) => (
-                                <ListItem key={`item- 1${item}`}>
-                                    <img onClick={showDogInfo(item)} style={{ width: '75px', borderRadius: '50%', marginRight: '10%' }} src='https://avatars2.githubusercontent.com/u/19846404?s=460&u=354d26e31cbb09b30bfbc1711fb879f0c1eb1f47&v=4' />
-                                    <ListItemText primary={`Perro ${item}`} />
-                                </ListItem>
-                            ))}
+                            {
+                                currentAdoptionRequests.map((match, index) => {
+                                    return (<ListItem key={match.adoption_request.reason_description}>
+                                        <img onClick={ showDogInfo(index) } style={{ width: '75px', borderRadius: '50%', marginRight: '10%' }} src={ match.seeker.image } />
+                                        <ListItemText primary={match.seeker.first_name} />
+                                    </ListItem>)
+                                })
+                           }
                         </ul>
                     </List>
                 </Grid>
             </>
-        );
-    } else {
+        )
+    }
+    else {
         return (
             <>
                 <Grid
@@ -149,6 +172,6 @@ export default function Home() {
                     </>
                 </Grid>
             </>
-        );
+        )
     }
-};
+}

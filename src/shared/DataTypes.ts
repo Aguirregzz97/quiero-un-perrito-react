@@ -26,3 +26,13 @@ export interface SeenDogs {
     seen_dogs: Array<string>;
     datetime: number; // secs since epoch
 }
+
+export type AdoptionRequest = {
+    reason_description: string,
+ }
+
+export type AdoptionRequestModel = {
+    adoption_request: AdoptionRequest,
+    dog: Dog,
+    seeker: UserModel,
+}

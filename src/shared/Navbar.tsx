@@ -19,7 +19,7 @@ export default function Navbar() {
                     <Link style={{ color: 'white', paddingRight: '10px' }} to='/'>Inicio</Link>
                 </Typography>
                 <Button color="inherit">Ajustes</Button>
-                <Button color="inherit">Ajustes</Button>
+                <Button color="inherit">Perfil</Button>
             </Toolbar>
         </AppBar>
     )

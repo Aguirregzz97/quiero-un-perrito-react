@@ -4,6 +4,7 @@ import Home from './Components/Home'
 import Register from './Components/Register'
 import Login from './Components/Login'
 import Navbar from './shared/Navbar'
+import Preferences from './Components/Preferences'
 
 type State = {
 }
@@ -20,8 +21,8 @@ export class App extends React.Component<Props, State> {
           <Route exact={ true } path='/' component={ Home } />
           <Route path='/registration' component={ Register } />
           <Route path='/login' component={ Login } />
+          <Route path='/preferences' component={ Preferences } />
         </Switch>
-      </>
-    )
+      </>    )
   }
 }

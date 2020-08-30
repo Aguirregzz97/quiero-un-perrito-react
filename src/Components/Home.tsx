@@ -58,7 +58,7 @@ export default function Home() {
             setCurrentMatchIndex(index)
             setModalOpen(true)
         }
-    } 
+    }
 
     const handleClose = () => {
         setModalOpen(false);
@@ -108,7 +108,7 @@ export default function Home() {
             setCurrentDoggo(getEmptyDoggo());
         }
     }, [index, nearbyDogs]);
-    
+
     if (!currentUser || !currentAdoptionRequests) {
         return (<h1>Loading...</h1>)
     }

@@ -7,4 +7,5 @@ export type UserModel = {
     Email: string,
     Password: string,
     ProfilePicture: string,
+    isAdopting: boolean,
 }

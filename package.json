@@ -16,6 +16,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@types/react-router-dom": "^5.1.5",
+    "@types/react-window": "^1.8.2",
     "@types/styled-components": "^5.1.2",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^2.0.0",
@@ -23,6 +24,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
+    "react-window": "^1.8.5",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {

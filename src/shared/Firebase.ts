@@ -34,5 +34,6 @@ firebase.auth().signInWithEmailAndPassword('aguirregzz97@gmail.com', 'Blacky7890
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 const storage = firebase.storage();
+const functions = firebase.functions();
 
-export { auth, firestore, storage };
+export { auth, firestore, storage, functions };

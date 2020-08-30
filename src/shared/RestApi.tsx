@@ -108,6 +108,7 @@ export class RestApi<T> {
                 Email: 'aguirregzz97@gmail.com',
                 ProfilePicture: 'https://avatars2.githubusercontent.com/u/19846404?s=460&u=354d26e31cbb09b30bfbc1711fb879f0c1eb1f47&v=4',
                 Password: 'password',
+                isAdopting: true,
             }
         )
     }

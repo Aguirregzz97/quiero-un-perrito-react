@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Grid, TextField, Button } from '@material-ui/core'
 import { getApiBaseUrl } from '../shared/GetApiBaseUrl'
 import { auth } from './..//shared/Firebase'
+import Swal from 'sweetalert2'
 
 type UserRegistration = {
     Email: string,
@@ -34,12 +35,21 @@ export default function Register() {
     }
 
     const registerUser = async () => {
-        auth.createUserWithEmailAndPassword(userRegistration.Email, userRegistration.Password).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-        });
+        try {
+            const response = await auth.createUserWithEmailAndPassword(userRegistration.Email, userRegistration.Password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+            });
+        } catch(error) {
+            console.log(error)
+        }
+        await Swal.fire({
+            icon: 'success',
+            title: 'Usuario creado correctamente!',
+        })
+        window.location.href = 'http://localhost:8080/#/'
     }
 
     return (

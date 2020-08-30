@@ -3,6 +3,8 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { Grid, TextField, Button } from '@material-ui/core'
 import { getApiBaseUrl } from '../shared/GetApiBaseUrl'
+import { auth } from './../shared/Firebase'
+import Swal from 'sweetalert2'
 
 
 type UserLogin = {
@@ -30,17 +32,23 @@ export default function Login() {
     }
 
     const loginUser = async () => {
-        const response = await fetch(`${getApiBaseUrl()}helloWorld`, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            method: 'POST',
-            body: JSON.stringify({
-                data: 'YES',
-            })
+        try {
+            auth.signInWithEmailAndPassword(userLogin.Email, userLogin.Password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+            });
+        }
+        catch(error) {
+            console.log(error)
+        }
+        await Swal.fire({
+            icon: 'success',
+            title: 'Login correcto!',
         })
-        console.log(await response.json())
+        window.location.href = 'http://localhost:8080/#/'
+
     }
 
     return (

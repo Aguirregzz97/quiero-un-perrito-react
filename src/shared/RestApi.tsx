@@ -102,13 +102,13 @@ export class RestApi<T> {
     public getMockUser(): UserModel {
         return (
             {
-                UserID: 0,
-                FirstName: 'Andres',
-                LastName: 'Aguirre',
-                Email: 'aguirregzz97@gmail.com',
-                ProfilePicture: 'https://avatars2.githubusercontent.com/u/19846404?s=460&u=354d26e31cbb09b30bfbc1711fb879f0c1eb1f47&v=4',
-                Password: 'password',
-                isAdopting: true,
+              uid: '',
+              first_name: '',
+              last_name: '',
+              type: 'seeker',
+              bio: '',
+              image: '',
+              location: ''
             }
         )
     }

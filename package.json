@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-window": "^1.8.2",
     "@types/styled-components": "^5.1.2",
@@ -25,7 +26,8 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-window": "^1.8.5",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "sweetalert2": "^9.17.1"
   },
   "devDependencies": {
     "@types/react": "^16.9.48",
